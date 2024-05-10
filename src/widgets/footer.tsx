@@ -14,6 +14,10 @@ const Footer = () => {
     }
   }
 
+  const navigateToPrivacyPolicy = () => {
+    navigate('/privacy-policy')
+  }
+
   return (
     <Stack
       as="footer"
@@ -49,11 +53,9 @@ const Footer = () => {
           <Heading color={'white'} fontSize={'medium'} mb={8}>
             Policies
           </Heading>
-          <Box color={'white'} textDecoration={'underline'} onClick={redirect} >
-            <HashLink to='#about-us' smooth >
-              Privacy Policy
-            </HashLink>
-          </Box>
+          <Button variant={'link'} onClick={navigateToPrivacyPolicy} color={'white'} fontWeight={'100'} textDecoration={'underline'}>
+            Privacy Policy
+          </Button>
         </Stack>
         </Flex>
 

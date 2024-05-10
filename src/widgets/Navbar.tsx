@@ -12,6 +12,10 @@ const Navbar = () => {
     navigate('/challenge-list')
   }
 
+  const navigateToUploadCase = () => {
+    navigate('/upload-case')
+  }
+
   const redirect = () => {
     if(window.location.pathname !== '/') {
       navigate('/')
@@ -71,6 +75,7 @@ const Navbar = () => {
               _hover={{
                 textDecoration: 'underline'
               }}
+              onClick={navigateToUploadCase}
               ms={8}
               >
               Collaborate with Us
