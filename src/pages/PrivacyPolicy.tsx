@@ -8,11 +8,17 @@ import {
   Text,
   theme,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 const PrivacyPolicy = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <Box mt={24} ms={64} me={72}>
-      <Stack mb={96} pb={96} color={'white'}>
+      <Stack pb={96} color={'white'}>
         <Heading as="h1" size="xl">
           Privacy Policy
         </Heading>
