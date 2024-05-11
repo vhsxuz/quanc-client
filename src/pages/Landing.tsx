@@ -1,7 +1,6 @@
 import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Flex, Heading, Image, Link, Stack, Text } from '@chakra-ui/react'
 import theme from '../theme'
-import { FaDiscord, FaGit, FaGithub, FaMinus, FaPlus } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
+import { FaDiscord, FaGithub, FaMinus, FaPlus } from "react-icons/fa";
 import React from 'react'
 import '@fontsource/lexend/400.css';
 import '@fontsource/lexend/500.css';
@@ -47,7 +46,6 @@ const Landing = () => {
                 backgroundColor: theme.colors.cyan[100],
                 color: "black",
               }}
-              onClick={navigateToChallengeList}
             >
             Join Now Using Github
             <Box ms={2}>
