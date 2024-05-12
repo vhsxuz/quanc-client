@@ -16,6 +16,7 @@ type Challenge = {
 const ChallengeList = () => {
   const navigate = useNavigate();
   const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   var accessToken = localStorage.getItem('accessToken');
 
@@ -31,6 +32,7 @@ const ChallengeList = () => {
 
     const data = await response.data;
     setChallenges(data.data)
+    setCount(data.data.length)
     setIsLoading(false);
   }, [])
 
@@ -39,12 +41,12 @@ const ChallengeList = () => {
   }, [getAllChallenges])
   
   return (
-    <Stack mt={56} ms={56} position={'relative'} minHeight={'100vh'}>
+    <Stack mt={56} ms={56} position={'relative'} minHeight={`${100+ (count * 5)}vh`}>
       <Stack>
         <Heading fontSize={'xxx-large'} fontWeight={400} color={'white'}>
           Challenge List
         </Heading>
-        <Box pe={64} mb={8}>
+        <Box pe={64} mb={8} mt={4}>
           <Divider orientation='horizontal' color={'white'} />
         </Box>
 
@@ -55,7 +57,7 @@ const ChallengeList = () => {
           <>
             { challenges && challenges.map((challenge: Challenge) => (
               <Stack key={challenge.challenge_id}>
-                <Stack border={'1px solid white'} borderRadius={4} p={4} me={64}>
+                <Stack border={`1px solid ${theme.colors.blue[500]}`} borderRadius={16} p={4} me={64} mt={4} backgroundColor={theme.colors.blue[400]}>
                   <Flex justifyContent={'space-between'} alignItems={'center'}>
                     <Box>
                     <Heading fontSize={'x-large'} fontWeight={400} color={'white'}>
