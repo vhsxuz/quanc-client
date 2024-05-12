@@ -6,7 +6,6 @@ import {
   ListItem,
   Stack,
   Text,
-  theme,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 

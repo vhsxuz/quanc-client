@@ -12,6 +12,7 @@ const router = () => {
       <Route path="/challenge-list" element={<ChallengeList />} />
       <Route path="/upload-case" element={<UploadCase />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      {/* <Route path='/success' element={<ChallengeList />}/> */}
     </Routes>
   )
 }

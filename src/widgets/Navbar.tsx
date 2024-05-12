@@ -1,19 +1,61 @@
 import { Box, Button, Flex, Image, Stack } from '@chakra-ui/react'
 import { FaGithub } from "react-icons/fa";
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import theme from '../theme'
 import { useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import axios from 'axios';
+
+interface githubUserData {
+  login?: string,
+  id?: string,
+  node_id?: string,
+  avatar_url?: string,
+  url?: string,
+}
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [renderer, setRenderer] = useState(false)
+  const [userData, setUserData] = useState<githubUserData>({})
+  const accessToken = localStorage.getItem('accessToken');
+  var codeParam: string | null;
+
+  const getAccessToken = useCallback(async () => {
+
+    if(codeParam === null || accessToken) {
+      return;
+    }
+
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: `http://localhost:8000/getAccessToken?code=${codeParam}`,
+      headers: { }
+    };
+
+    try {
+      const response = await axios.get("http://localhost:8000/getAccessToken?code=" + codeParam, {
+        method: "GET"
+      });
+      if (!response) {
+        throw new Error('Network response was not ok.');
+      }
+      const data = await response.data;
+
+      if (data.access_token) {
+        localStorage.setItem('accessToken', data.access_token);
+        setRenderer(!renderer);
+        navigate('/challenge-list');
+      }
+    } catch (error) {
+      console.error('Error fetching access token:', error);
+    }
+  }, [])
   
-  const navigateToChallengeList = () => {
-    navigate('/challenge-list')
-  }
 
   const navigateToUploadCase = () => {
-    navigate('/upload-case')
+    navigate('upload-case')
   }
 
   const redirect = () => {
@@ -21,6 +63,25 @@ const Navbar = () => {
       navigate('/')
     }
   }
+
+  function login() {
+    window.location.assign('https://github.com/login/oauth/authorize?client_id=' + process.env.REACT_APP_CLIENT_ID);
+  }
+
+  function logout() {
+    localStorage.removeItem('accessToken')
+    setRenderer(!renderer)
+    navigate('/')
+  }
+
+  useEffect(() => {
+    const queryString = window.location.search
+    const urlSearchParam = new URLSearchParams(queryString)
+    codeParam = urlSearchParam.get('code')
+    
+    getAccessToken()
+
+  }, [getAccessToken])
 
   return (
     <Stack
@@ -80,23 +141,55 @@ const Navbar = () => {
               >
               Collaborate with Us
             </Button>
+            {
+              accessToken ?
+                <Button
+                variant={'link'}
+                color={'white'}
+                fontWeight={100}
+                _hover={{
+                  textDecoration: 'underline'
+                }}
+                // onClick={navigateToChallengeList}
+                ms={8}
+                >
+                  Challenge List
+                </Button>
+              :
+              <></>
+            }
           </Box>
         </Flex>
         <Box ms={96} ps={56}>
-          <Button
-            backgroundColor={theme.colors.blue[200]}
-            color={'white'}
-            fontWeight={100}
-            _hover={{
-              backgroundColor: theme.colors.blue[100],
-            }}
-            onClick={navigateToChallengeList}
-            >
-            Login with Github
-            <Box ms={2}>
-              <FaGithub />
-            </Box>
-          </Button>
+          {
+            accessToken ?
+              <Button
+                backgroundColor={theme.colors.blue[200]}
+                color={'white'}
+                fontWeight={100}
+                _hover={{
+                  backgroundColor: theme.colors.blue[100],
+                }}
+                onClick={logout}
+                >
+                Logout
+              </Button>
+            :
+              <Button
+                backgroundColor={theme.colors.blue[200]}
+                color={'white'}
+                fontWeight={100}
+                _hover={{
+                  backgroundColor: theme.colors.blue[100],
+                }}
+                onClick={login}
+                >
+                Login with Github
+                <Box ms={2}>
+                  <FaGithub />
+                </Box>
+              </Button>
+          }
         </Box>
       </Flex>
     </Stack>
