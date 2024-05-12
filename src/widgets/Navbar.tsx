@@ -42,34 +42,15 @@ const Navbar = () => {
         throw new Error('Network response was not ok.');
       }
       const data = await response.data;
-      console.log(data); // Log the data received from the response
+
       if (data.access_token) {
-        console.log("DATA DAPET")
         localStorage.setItem('accessToken', data.access_token);
         setRenderer(!renderer);
-        console.log("navigate to challenge list")
         navigate('/challenge-list');
       }
     } catch (error) {
       console.error('Error fetching access token:', error);
     }
-
-    // axios.request(config)
-    // .then((response) => {
-    //   console.log(JSON.stringify(response.data));
-      
-    //   const data = response.data;
-    //   console.log(data); // Log the data received from the response
-    //   if (data.access_token) {
-    //     localStorage.setItem('accessToken', data.access_token);
-    //     setRenderer(!renderer);
-    //     navigate('/challenge-list');
-    //   }
-
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
   }, [])
   
 

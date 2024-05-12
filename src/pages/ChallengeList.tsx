@@ -2,6 +2,7 @@ import { Box, Button, Divider, Flex, Heading, Stack, Text, Spinner } from '@chak
 import React, { useCallback, useEffect, useState } from 'react'
 import theme from '../theme'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type Challenge = {
   challenge_id: string;
@@ -20,17 +21,15 @@ const ChallengeList = () => {
 
   
   const getAllChallenges = useCallback( async () => {
-    console.log('getAllChallenges')
     accessToken = localStorage.getItem('accessToken')
-    console.log(accessToken);
-    const response = await fetch('http://localhost:8000/getChallenges', {
+    const response = await axios.get('http://localhost:8000/getChallenges', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${accessToken}` 
       }
     });
 
-    const data = await response.json();
+    const data = await response.data;
     setChallenges(data.data)
     setIsLoading(false);
   }, [])
