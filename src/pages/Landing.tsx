@@ -4,16 +4,14 @@ import { FaDiscord, FaGithub, FaMinus, FaPlus } from "react-icons/fa";
 import React from 'react'
 import '@fontsource/lexend/400.css';
 import '@fontsource/lexend/500.css';
-import { useNavigate } from 'react-router-dom';
 
 
 const Landing = () => {
 
-  const navigate = useNavigate();
-  
-  const navigateToChallengeList = () => {
-    navigate('/challenge-list')
+  function login() {
+    window.location.assign('https://github.com/login/oauth/authorize?client_id=' + process.env.REACT_APP_CLIENT_ID);
   }
+
 
   return (
     <Stack position={'relative'} minHeight={'80vh'}>
@@ -46,11 +44,12 @@ const Landing = () => {
                 backgroundColor: theme.colors.cyan[100],
                 color: "black",
               }}
+              onClick={login}
             >
-            Join Now Using Github
-            <Box ms={2}>
+            <Box me={2}>
               <FaGithub />
             </Box>
+            Join Now Using Github
           </Button>
         </Stack>
       </Stack>
@@ -251,7 +250,7 @@ const Landing = () => {
               Start practicing your skills now in a fun <br />
               and interactive way with Quan C
             </Text>
-            <Link href='https://www.google.com'>
+            <Link>
               <Button
               backgroundColor={theme.colors.blue[700]}
               border={`1px solid ${theme.colors.cyan[100]}`}
@@ -261,6 +260,7 @@ const Landing = () => {
                 backgroundColor: theme.colors.cyan[100],
                 color: "black",
               }}
+              onClick={login}
               >
                 <Box me={2}>
                   <FaGithub />

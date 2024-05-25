@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import '@fontsource/lexend/index.css';
+import { withProse } from "@nikolovlazar/chakra-ui-prose";
 
 const theme = extendTheme({
   colors: {
@@ -24,6 +25,6 @@ const theme = extendTheme({
     heading: 'Lexend',
     body: 'Lexend',
   },
-});
+}, withProse());
 
 export default theme;

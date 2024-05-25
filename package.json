@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fontsource-variable/lexend-peta": "^5.0.13",
+    "@nikolovlazar/chakra-ui-prose": "^1.2.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,6 +14,7 @@
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "dotenv": "^16.4.5",
+    "markdown-to-jsx": "^7.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -44,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@ajna/pagination": "^1.4.19",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
@@ -51,14 +54,17 @@
     "@fontsource/lexend": "^5.0.20",
     "@types/js-cookie": "^3.0.6",
     "@types/react-router-hash-link": "^2.4.9",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "axios": "^1.6.8",
     "fa-icon": "^0.0.0",
     "framer-motion": "^11.1.7",
     "js-cookie": "^3.0.5",
     "react-cookie": "^7.1.4",
     "react-icons": "^5.1.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.23.0",
     "react-router-hash-link": "^2.4.3",
+    "react-syntax-highlighter": "^15.5.0",
     "tailwindcss": "^3.4.3"
   }
 }

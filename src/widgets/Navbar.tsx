@@ -27,13 +27,6 @@ const Navbar = () => {
       return;
     }
 
-    let config = {
-      method: 'get',
-      maxBodyLength: Infinity,
-      url: `http://localhost:8000/getAccessToken?code=${codeParam}`,
-      headers: { }
-    };
-
     try {
       const response = await axios.get("http://localhost:8000/getAccessToken?code=" + codeParam, {
         method: "GET"
@@ -62,6 +55,10 @@ const Navbar = () => {
     if(window.location.pathname !== '/') {
       navigate('/')
     }
+  }
+
+  const navigateToChallengeList = () => {
+    navigate('challenge-list');
   }
 
   function login() {
@@ -150,7 +147,7 @@ const Navbar = () => {
                 _hover={{
                   textDecoration: 'underline'
                 }}
-                // onClick={navigateToChallengeList}
+                onClick={navigateToChallengeList}
                 ms={8}
                 >
                   Challenge List
@@ -184,10 +181,10 @@ const Navbar = () => {
                 }}
                 onClick={login}
                 >
-                Login with Github
-                <Box ms={2}>
+                <Box me={2}>
                   <FaGithub />
                 </Box>
+                Login with Github
               </Button>
           }
         </Box>
