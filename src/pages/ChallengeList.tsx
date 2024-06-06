@@ -29,7 +29,7 @@ type Challenge = {
   created_at: Date;
   points: number;
   repo_link: string;
-  total_test_case: number;
+  total_test_Case: number;
   tags: Tag;
 };
 
@@ -86,11 +86,10 @@ const ChallengeList = () => {
       data.data.forEach((data: { status: string; }) => {
         data.status = value;
       });
-      console.log(data.data);
       setTotalPage(data.paginationData.totalPages);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -98,8 +97,8 @@ const ChallengeList = () => {
     setCurrentPage(nextPage);
   };
 
-  const navigateToChallengeDetail = (id: string, link: string) => {
-    navigate(`/challenge-detail/${id}?link=${encodeURIComponent(link)}`);
+  const navigateToChallengeDetail = (id: string, link: string, total_test_case: number) => {
+    navigate(`/challenge-detail?id=${id}&link=${encodeURIComponent(link)}&total_test_case=${total_test_case}`);
   }
 
   const handleChange = (nextValue: string): void => {
@@ -220,7 +219,9 @@ const ChallengeList = () => {
                           color: theme.colors.blue[700],
                           opacity: challenge.status === 'incomplete' ? 1 : 0.7
                         }}
-                        onClick={() => {navigateToChallengeDetail(challenge.challenge_id, challenge.repo_link)}}
+                        onClick={() => {
+                          navigateToChallengeDetail(challenge.challenge_id, challenge.repo_link, challenge.total_test_Case)
+                        }}
                         >
 
                           {challenge.status === 'incomplete' ? 

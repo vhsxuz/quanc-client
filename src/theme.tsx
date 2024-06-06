@@ -17,6 +17,9 @@ const theme = extendTheme({
     cyan: {
       100: "#00FFFC",
     },
+    green: {
+      100: "#1ED760",
+    },
     background: {
       default: "#0A2647"
     },
