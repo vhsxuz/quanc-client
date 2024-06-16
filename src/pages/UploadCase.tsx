@@ -16,6 +16,8 @@ const UploadCase: React.FC = () => {
   const [tags, setTags] = useState([
     { label: 'Tag 1', value: ''},
   ]);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [error, setError] = useState("");
   const accessToken = localStorage.getItem('accessToken');
 
   const dropZoneRef = useRef<HTMLDivElement | null>(null)
@@ -41,14 +43,14 @@ const UploadCase: React.FC = () => {
     const validFormats = ['zip'];
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     const isValidFormat = fileExtension && validFormats.includes(fileExtension);
-    const isValidSize = file.size <= 100 * 1024 * 1024;
+    const isValidSize = file.size <= 30 * 1024 * 1024;
 
     if (isValidFormat && isValidSize) {
       setUploadedFile(file);
       setErrorMessage(null);
     } else {
       setUploadedFile(null);
-      setErrorMessage('Invalid file format or size. Please upload a valid ZIP file not exceeding 100MB.');
+      setErrorMessage('Invalid file format or size. Please upload a valid ZIP file not exceeding 30 MB.');
     }
   };
 
@@ -78,16 +80,8 @@ const UploadCase: React.FC = () => {
   };
 
   const handleSubmit = (file: File) => {
-    console.log("Submitted!");
-    console.log("Title:", title);
-    console.log("Url: ", link);
-    console.log("Points:", points);
-    console.log("Total Test Case:", totalTestCase);
-    console.log("Tags:", tags.map(tag => tag.value));
-    console.log("Uploaded File:", file);
-
+    setError("");
     const data = new FormData();
-    // const blobFile: Blob = new Blob([file], {type: file.type})
 
     data.append('title', title);
     data.append('link', link);
@@ -108,15 +102,17 @@ const UploadCase: React.FC = () => {
       },
       data : data
     };
-    
-    console.log(config)
 
     axios.request(config)
     .then((response) => {
-      console.log(JSON.stringify(response.data));
+      const data = response.data;
+      setIsUploaded(true)
+      console.log(JSON.stringify(data));
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error.response.data);
+      const errorMessage = error.response.data.message
+      setError(errorMessage)
     });
 
   };
@@ -259,7 +255,7 @@ const UploadCase: React.FC = () => {
                   mt={2}
                 >
                   <Text color={'white'}>
-                    Upload Your Answer Here
+                    Upload Your Case Here
                   </Text>
                   <Input 
                     ref={inputRef}
@@ -270,7 +266,7 @@ const UploadCase: React.FC = () => {
                   />
                 </FormLabel>
                 <Box fontSize="s" color="white" textAlign={'center'}>
-                  ZIP File Max 100MB
+                  ZIP File Max 30MB
                 </Box>
               </Stack>
             }
@@ -301,6 +297,20 @@ const UploadCase: React.FC = () => {
           Submit
         </Button>
       </FormControl>
+      {
+        isUploaded && error === "" ? 
+        <Stack>
+          <Text color={'white'}>
+            Case Uploaded
+          </Text>
+        </Stack>
+        : 
+        <Stack>
+        <Text color={'red'}>
+          { error }
+        </Text>
+        </Stack>
+      }
       </Stack>
     </Stack>
   )

@@ -140,11 +140,11 @@ const ChallengeDetail: React.FC<ChallengeDetailProps> = ({ id }) => {
     setIsChecking(true);
     setIsLoading(true);
     const data = new FormData();
-    const blobFile: Blob = new Blob([file], {type: file.type})
+    // const blobFile: Blob = new Blob([file], {type: file.type})
 
-    data.append('userId', userId);
+    data.append('userId', userId.toString());
     data.append('challengeId', challengeId ?? "");
-    data.append('file', blobFile);
+    data.append('file', file);
     
     let config = {
       method: 'post',

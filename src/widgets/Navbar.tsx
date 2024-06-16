@@ -33,6 +33,7 @@ const Navbar = () => {
       const response = await axios.get("http://localhost:8000/getAccessToken?code=" + codeParam, {
         method: "GET"
       });
+      console.log(response)
       if (!response) {
         throw new Error('Network response was not ok.');
       }

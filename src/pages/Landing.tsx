@@ -4,12 +4,21 @@ import { FaDiscord, FaGithub, FaMinus, FaPlus } from "react-icons/fa";
 import React from 'react'
 import '@fontsource/lexend/400.css';
 import '@fontsource/lexend/500.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const Landing = () => {
 
+
+  const accessToken = localStorage.getItem('accessToken');
+  const navigate = useNavigate();
+
   function login() {
-    window.location.assign('https://github.com/login/oauth/authorize?client_id=' + process.env.REACT_APP_CLIENT_ID);
+    if (!accessToken) {
+      window.location.assign('https://github.com/login/oauth/authorize?client_id=' + process.env.REACT_APP_CLIENT_ID);
+    } else {
+      navigate('/challenge-list')
+    }
   }
 
 
@@ -223,7 +232,7 @@ const Landing = () => {
             Join Our Community in Discord to learn and gather
             knowledges with other developers
             </Text>
-            <Link href='https://www.google.com'>
+            <Link href='https://discord.com/invite/5ZUsk7q5vq'>
               <Button
               backgroundColor={theme.colors.blue[700]}
               border={`1px solid ${theme.colors.cyan[100]}`}

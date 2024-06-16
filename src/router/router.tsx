@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {Routes, Route} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Landing from '../pages/Landing';
 import ChallengeList from '../pages/ChallengeList';
 import UploadCase from '../pages/UploadCase';
@@ -8,11 +8,38 @@ import AuthMiddleware from './middleware';
 import ChallengeDetail from '../pages/ChallengeDetail';
 import Collaborate from '../pages/Collaborate';
 import ViewLog from '../pages/ViewLog';
+import { error } from 'console';
+import AdminMiddleware from './adminMiddleware';
 
-const router = () => {
+const waitForAccessToken = async (interval = 100, timeout = 5000) => {
+  const startTime = Date.now();
+
+  const checkToken = () => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      return token;
+    }
+    if (Date.now() - startTime >= timeout) {
+      throw new Error('Timed out waiting for access token');
+    }
+    return null;
+  };
+
+  return new Promise((resolve, reject) => {
+    const intervalId = setInterval(() => {
+      const token = checkToken();
+      if (token) {
+        clearInterval(intervalId);
+        resolve(token);
+      }
+    }, interval);
+  });
+};
+
+const RouterComponent = () => {
 
   const ChallengeListRoute = (props: any) => {
-    const AuthComponent = AuthMiddleware(ChallengeList);
+    const AuthComponent = AuthMiddleware(ChallengeList as any);
     return <AuthComponent {...props} />;
   };
 
@@ -26,34 +53,10 @@ const router = () => {
     return <AuthComponent {...props} />;
   };
 
-  const UploadCaseRoute = (props: any, ) => {
-    const userRole = getUserData();
-    console.log(userRole)
-    const AuthComponent = AuthMiddleware(UploadCase as any);
+  const UploadCaseRoute = (props: any) => {
+    const AuthComponent = AdminMiddleware(UploadCase as any);
     return <AuthComponent {...props} />;
   };
-
-  const getUserData = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/getUserData', {
-        method: 'GET',
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
-
-      const data = await response.json();
-      const userRole = data.data.app_data.role
-      return userRole;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
 
   return (
     <Routes>
@@ -68,4 +71,4 @@ const router = () => {
   );
 };
 
-export default router
+export default RouterComponent;

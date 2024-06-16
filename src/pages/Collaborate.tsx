@@ -1,33 +1,34 @@
-import { Heading, Link, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
-import theme from '../theme'
-
+import { Box, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import theme from '../theme';
+import ReactMarkdown from 'react-markdown';
+import { Prose } from '@nikolovlazar/chakra-ui-prose';
 
 const Collaborate = () => {
+  const [guidelines, setGuidelines] = useState('');
+
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/Guidelines.md`)
+      .then(response => response.text())
+      .then(data => setGuidelines(data))
+      .catch(error => console.error('Error fetching the file:', error));
+  }, []);
+
   return (
     <Stack mt={36}>
-    <Stack mb={96} pb={96}>
-      <Stack ms={56}>
-        <Heading color={theme.colors.cyan[100]} fontSize={'6xl'}>
-          Case Upload Guidelines
-        </Heading>
-
-        <Text color={'white'} mt={4}>
-          Step by step on publish your custom case through our email 
-        </Text>
-
-        <Text color={'white'}>
-          {"Join us on "}
-          <Link href="https://discord.com/invite/5ZUsk7q5vq">
-             Discord 
-            </Link>
-          {" if you have any questions"}
-        </Text>
+      <Stack mb={96} pb={36}>
+        <Stack ms={56}>
+            <Box me={36} p={12} mt={8} color={'white'} backgroundColor={theme.colors.blue[400]} borderRadius={24}>
+            <Prose>
+              <ReactMarkdown>
+                {guidelines}
+              </ReactMarkdown>
+            </Prose>
+          </Box>
+        </Stack>
       </Stack>
     </Stack>
+  );
+};
 
-  </Stack>
-  )
-}
-
-export default Collaborate
+export default Collaborate;
