@@ -140,133 +140,120 @@ const Navbar = () => {
   }, [getAccessToken])
 
   return (
-      <Stack
-        ps={16}
-        pt={4}
-        pb={4}
-        position="fixed"
-        top={0}
-        left={0}
-        right={0}
-        zIndex={1}
-        bgGradient={`linear(to-b, ${theme.colors.blue[450]}, ${theme.colors.blue[400]})`}
-        boxShadow="lg"
+    <Stack
+      ps={4}
+      pt={4}
+      pb={4}
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      zIndex={1}
+      bgGradient={`linear(to-b, ${theme.colors.blue[450]}, ${theme.colors.blue[400]})`}
+      boxShadow="lg"
+      spacing={0}
+      direction="row"
+      align="center"
+    >
+      <Flex align="center" flex={1} pr={0}>
+        <Image src={`${process.env.PUBLIC_URL}/quanc-logo.png`} width={'40%'} onClick={() => { navigate('/'); }} />
+      </Flex>
+      <Flex
+        align="left"
+        flex={3}
+        direction={{ base: 'column', md: 'row' }}
+        gap={8}
+        wrap="wrap"
       >
-        <Flex>
-          <Image src={`${process.env.PUBLIC_URL}/quanc-logo.png`} width={'10%'} onClick={() => {navigate('/')}}/>
-          <Flex justify={'space-between'} ms={4} mt={2}>
-            <Box 
-              ms={24} 
-              color={'white'}
-              _hover={{
-                textDecoration: 'underline'
-              }}
-              onClick={redirect}
-              >
-              <HashLink 
-              to='#about-us'
-              smooth            >
-                About Us
-              </HashLink>
-            </Box>
-            <Box 
-              ms={8} 
-              color={'white'}
-              _hover={{
-                textDecoration: 'underline'
-              }}
-              onClick={redirect}
-              >
-              <HashLink 
-              to='#faq'
-              smooth
-              >
-                FAQ
-              </HashLink>
-            </Box>
-            <Box>
+        <Box 
+          color={'white'}
+          _hover={{ textDecoration: 'underline' }}
+          onClick={redirect}
+        >
+          <HashLink to='#about-us' smooth>
+            About Us
+          </HashLink>
+        </Box>
+        <Box 
+          color={'white'}
+          _hover={{ textDecoration: 'underline' }}
+          onClick={redirect}
+        >
+          <HashLink to='#faq' smooth>
+            FAQ
+          </HashLink>
+        </Box>
+        <Box>
+          <Button
+            variant={'link'}
+            color={'white'}
+            fontWeight={100}
+            _hover={{ textDecoration: 'underline' }}
+            onClick={navigateToCollaborate}
+          >
+            Collaborate with Us
+          </Button>
+          {accessToken &&
+            <>
               <Button
                 variant={'link'}
                 color={'white'}
                 fontWeight={100}
-                _hover={{
-                  textDecoration: 'underline'
-                }}
-                onClick={navigateToCollaborate}
+                _hover={{ textDecoration: 'underline' }}
+                onClick={navigateToChallengeList}
                 ms={8}
-                >
-                Collaborate with Us
+              >
+                Challenge List
               </Button>
-              {
-                accessToken ?
-                  <Button
+              {userRole === 'admin' &&
+                <Button
                   variant={'link'}
                   color={'white'}
                   fontWeight={100}
-                  _hover={{
-                    textDecoration: 'underline'
-                  }}
-                  onClick={navigateToChallengeList}
-                  ms={8}
-                  >
-                    Challenge List
-                  </Button>
-                :
-                <></>
-              }
-              {
-                accessToken && userRole === 'admin' ?
-                  <Button
-                  variant={'link'}
-                  color={'white'}
-                  fontWeight={100}
-                  _hover={{
-                    textDecoration: 'underline'
-                  }}
+                  _hover={{ textDecoration: 'underline' }}
                   onClick={navigateToUploadCase}
                   ms={8}
-                  >
-                    Upload Case
-                  </Button>
-                :
-                <></>
+                >
+                  Upload Case
+                </Button>
               }
+            </>
+          }
+        </Box>
+      </Flex>
+      <Flex
+        align="center"
+        flex={1}
+        justify="flex-end"
+      >
+        {accessToken ?
+          <Button
+            backgroundColor={theme.colors.blue[200]}
+            color={'white'}
+            fontWeight={100}
+            _hover={{ backgroundColor: theme.colors.blue[100] }}
+            onClick={logout}
+            me={4}
+          >
+            Logout
+          </Button>
+          :
+          <Button
+            backgroundColor={theme.colors.blue[200]}
+            color={'white'}
+            fontWeight={100}
+            _hover={{ backgroundColor: theme.colors.blue[100] }}
+            onClick={login}
+            me={4}
+          >
+            <Box me={2}>
+              <FaGithub />
             </Box>
-          </Flex>
-          <Box ms={96} ps={56}>
-            {
-              accessToken ?
-                <Button
-                  backgroundColor={theme.colors.blue[200]}
-                  color={'white'}
-                  fontWeight={100}
-                  _hover={{
-                    backgroundColor: theme.colors.blue[100],
-                  }}
-                  onClick={logout}
-                  >
-                  Logout
-                </Button>
-              :
-                <Button
-                  backgroundColor={theme.colors.blue[200]}
-                  color={'white'}
-                  fontWeight={100}
-                  _hover={{
-                    backgroundColor: theme.colors.blue[100],
-                  }}
-                  ms={36}
-                  onClick={login}
-                  >
-                  <Box me={2}>
-                    <FaGithub />
-                  </Box>
-                  Login with Github
-                </Button>
-            }
-          </Box>
-        </Flex>
-      </Stack>
+            Login with Github
+          </Button>
+        }
+      </Flex>
+    </Stack>
   )
 }
 
