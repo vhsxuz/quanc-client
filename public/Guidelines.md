@@ -11,7 +11,7 @@ There are some steps involve in making your own challenge, we are going to expla
 
 ##### [PathGuard by xhfmvls](https://github.com/xhfmvls/PathGuard.git)
 
-##### [Sequel-Express-Injection by xhfmvls](git@github.com:xhfmvls/Sequel-Express-Injection.git)
+##### [Sequel-Express-Injection by xhfmvls](https://github.com/xhfmvls/Sequel-Express-Injection)
 
 ---
 
@@ -104,7 +104,7 @@ git push origin main
 
 ### 3. Submit Your Challenge
 
-To  submit your challenge, you can email us through [project.quanc@gmail.com](project.quanc@gmail.com) with the format
+To  submit your challenge, you can email us through **project.quanc@gmail.com** with the format
 
 ```
 <Email Title>
