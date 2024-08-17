@@ -9,9 +9,9 @@ Quan C is an open-source secure programming training platform which allows other
 
 There are some steps involve in making your own challenge, we are going to explain it to you. But you can also see one of the example case provided by us below.
 
-##### [PathGuard by xhfmvls](https://github.com/xhfmvls/PathGuard.git)
+>#### [[PathGuard by xhfmvls]](https://github.com/xhfmvls/PathGuard.git)
 
-##### [Sequel-Express-Injection by xhfmvls](https://github.com/xhfmvls/Sequel-Express-Injection)
+>#### [[Sequel-Express-Injection by xhfmvls]](https://github.com/xhfmvls/Sequel-Express-Injection)
 
 ---
 
@@ -121,4 +121,4 @@ Explanation: Brief explanations about the program and the vulnerability that you
 ### 4. Wait For Our Approval Email
 We will send you approval email about your submitted challenges and we will featured your GitHub as the creator of the challenge and contributor to the community.
 
-#### We'll be looking for your contribution and don't forget to join our [Discord](https://discord.gg/N84JgfhpQE)!
+##### We'll be looking for your contribution and don't forget to join our [Discord](https://discord.gg/N84JgfhpQE)!
