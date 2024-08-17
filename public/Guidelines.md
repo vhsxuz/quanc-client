@@ -9,9 +9,9 @@ Quan C is an open-source secure programming training platform which allows other
 
 There are some steps involve in making your own challenge, we are going to explain it to you. But you can also see one of the example case provided by us below.
 
-##### [<font color="black">PathGuard by xhfmvls</font>](https://github.com/xhfmvls/PathGuard.git)
+##### [PathGuard by xhfmvls](https://github.com/xhfmvls/PathGuard.git)
 
-##### [<font color="black">Sequel-Express-Injection by xhfmvls</font>](git@github.com:xhfmvls/Sequel-Express-Injection.git)
+##### [Sequel-Express-Injection by xhfmvls](git@github.com:xhfmvls/Sequel-Express-Injection.git)
 
 ---
 
@@ -44,7 +44,7 @@ git --version
 
 If there is no git installed, you can download it from here.
 
-[<font color="black">**Git Download**</font>](https://www.git-scm.com/downloads)
+[**Git Download**](https://www.git-scm.com/downloads)
 
 ---
 
@@ -104,7 +104,7 @@ git push origin main
 
 ### 3. Submit Your Challenge
 
-To  submit your challenge, you can email us through [<font color="black">project.quanc@gmail.com</font>](project.quanc@gmail.com) with the format
+To  submit your challenge, you can email us through [project.quanc@gmail.com](project.quanc@gmail.com) with the format
 
 ```
 <Email Title>
@@ -121,4 +121,4 @@ Explanation: Brief explanations about the program and the vulnerability that you
 ### 4. Wait For Our Approval Email
 We will send you approval email about your submitted challenges and we will featured your GitHub as the creator of the challenge and contributor to the community.
 
-#### We'll be looking for your contribution and don't forget to join our [<font color="black">Discord</font>](https://discord.gg/N84JgfhpQE)!
+#### We'll be looking for your contribution and don't forget to join our [Discord](https://discord.gg/N84JgfhpQE)!
