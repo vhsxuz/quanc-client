@@ -130,6 +130,7 @@ const Navbar = () => {
     const queryString = window.location.search
     const urlSearchParam = new URLSearchParams(queryString)
     codeParam = urlSearchParam.get('code')
+    console.log("CODE PARAM: ", codeParam);
     
     getAccessToken()
     if (accessToken) {

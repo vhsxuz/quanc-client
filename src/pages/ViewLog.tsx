@@ -52,7 +52,10 @@ const ViewLog = () => {
           <Box color={'white'} overflow="auto" p={4}>
             {log && (
               <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', overflowWrap: 'break-word', color: 'white' }}>
-                {JSON.stringify(log, null, 2)}
+                {log.data
+                  .replace(/^"|"$/g, '')
+                  .replace(/\\n/g, '<br />')
+                }
               </pre>
             )}
           </Box>

@@ -10,6 +10,7 @@ import Collaborate from '../pages/Collaborate';
 import ViewLog from '../pages/ViewLog';
 import { error } from 'console';
 import AdminMiddleware from './adminMiddleware';
+import History from '../pages/History';
 
 const waitForAccessToken = async (interval = 100, timeout = 5000) => {
   const startTime = Date.now();
@@ -58,6 +59,11 @@ const RouterComponent = () => {
     return <AuthComponent {...props} />;
   };
 
+  const HistoryRoute = (props: any) => {
+    const AuthComponent = AdminMiddleware(History as any);
+    return <AuthComponent {...props} />;
+  };
+
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
@@ -65,6 +71,7 @@ const RouterComponent = () => {
       <Route path="/challenge-detail" element={<ChallengeDetailRoute />} />
       <Route path="/view-log" element={<ViewLogRoute />} />
       <Route path="/upload-case" element={<UploadCaseRoute />} />
+      <Route path="/history" element={<HistoryRoute />} />
       <Route path="/collaborate" element={<Collaborate />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>

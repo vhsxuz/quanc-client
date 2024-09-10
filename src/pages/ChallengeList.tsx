@@ -43,6 +43,7 @@ const ChallengeList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [totalPage, setTotalPage] = useState(0);
+  const [userPoint, setUserPoint] = useState(0);
 
   const {
     currentPage,
@@ -57,6 +58,27 @@ const ChallengeList = () => {
     },
     initialState: { currentPage: 1 },
   });
+
+  async function getUserData() {
+    try {
+      const response = await fetch('http://localhost:8000/getUserData', {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+  
+      const data = await response.json();
+      console.log(data.data.id)
+      setUserPoint(data.data.app_data.total_points)
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const getAllChallenges = async (page: number) => {
     const accessToken = localStorage.getItem('accessToken');
@@ -101,6 +123,10 @@ const ChallengeList = () => {
     navigate(`/challenge-detail?id=${id}&link=${encodeURIComponent(link)}&total_test_case=${total_test_case}`);
   }
 
+  const navigateToHistory = () => {
+    navigate('/history')
+  }
+
   const handleChange = (nextValue: string): void => {
     setValue(nextValue);
     setCurrentPage(1);
@@ -124,6 +150,7 @@ const ChallengeList = () => {
   };
 
   useEffect(() => {
+    getUserData();
     getAllChallenges(currentPage);
   }, [currentPage, value, difficulty]);
   
@@ -132,10 +159,17 @@ const ChallengeList = () => {
       <Stack direction={'row'} spacing={0}>
         <Stack width={'90%'} ps={36}>
           <Flex justifyContent={'space-between'}>
-            <Heading fontSize={'xxx-large'} fontWeight={400} color={'white'}>
-              Challenge List
-            </Heading>
-            
+            <Stack>
+              <Heading fontSize={'xxx-large'} fontWeight={400} color={'white'}>
+                Challenge List
+              </Heading>
+              <Button 
+              onClick={navigateToHistory}
+              backgroundColor={theme.colors.blue[100]}
+            >
+              View Submission History
+            </Button>
+            </Stack>
             <Box pe={64} mb={8} mt={4}>
               <InputGroup>
                 <InputLeftElement pointerEvents="none">
